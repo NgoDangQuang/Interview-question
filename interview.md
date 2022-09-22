@@ -360,15 +360,21 @@ hoặc có thể viết như sau:
 
 # D. React JS
 
-### Câu 1: khái niệm Stateless component hoặc Functional component ? Tại sao lại viết functional component, viết thế có gì lợi thế hơn 1 component bình thường có render có component dismount ?
+### Câu 1: Sự khác nhau giữa Functional Component (stateless) và Class Component (stateful) trong ReactJS?
 
-- Là các hàm không có local state và cũng không có life cycles method.
-- Vì nó gọn hơn, dễ test hơn, vì khi viết một hàm thì cái hàm nó sẽ dễ đọc hơn, input là props, output là render thì nó sẽ dễ dàng đọc hơn Thay vì việc phải viết một cái class extend rồi hàm render và đủ hàm khác
+- Functional component (stateless) là hàm không có local state và cũng không có lifecycle method , vì thế cũng không có componentDidMount.
+- Class component (stateful): là hàm có state, có lifecycle method
+
+==> Chúng ta thường sẽ dùng class component khi chúng ta cần có state
+==> Chúng ta sẽ dùng Functional component khi chung ta không cần có state
+
+===> Chọn Functional component vì nó gọn hơn, dễ test hơn vì khi viết một hàm thì cái hàm nó sẽ dễ đọc hơn với input là props, output là render. Thay vì việc phải viết một cái class component có extend , có hàm render, rồi đủ thứ hàm khác nữa.
+
 
 ### Câu 2. Trong component khi muốn lấy dữ liệu từ server để hiển thị ra thì cái hàm lấy dữ liệu ta sẽ viết trong function nào?
 
-- component dismount
-- component dismount đc gọi sau khi được render
+- component didmount
+- component didmount đc gọi sau khi được render
 
 ### Câu 3: React có gì hay mà người ta dùng nhiều vậy ?
 
@@ -382,3 +388,33 @@ hoặc có thể viết như sau:
 ### Câu 5. kể tên một số Hook trong ReactHook?
 
 - useState, useEffect, useReducer, useMemo, useCallback, useRef, ...
+
+### Câu 6. FetchAPI trong React?
+
+`function App() {
+	const [data, setData] = useState([]);
+	
+	useEffect(() => {
+		// API_ENDPOINT là bất kỳ đường dẫn API nào trả về dạng JSON
+		fetch("API_ENDPOINT")
+			.then(response => {
+				// Kiểm tra trạng thái phản hồi
+				if(!response.ok) {
+					throw new Error(response);
+				}
+				
+				// Phản hồi không lỗi, trả về JSON cho then tiếp theo lấy dữ liệu
+				return response.json();
+			})
+			.then(data => {
+				// Lấy dữ liệu và setState cho data
+				setData(data);
+			})
+			.catch(err => alert("Có lỗi"))
+			.finally(() => {
+				console.log("End")
+			})
+	}, [])
+	
+	return <div>Demo</demo>
+}`
