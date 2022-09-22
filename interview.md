@@ -391,8 +391,10 @@ hoặc có thể viết như sau:
 
 ### Câu 6. FetchAPI trong React?
 
-`function App() {
+`
+function App() {
 	const [data, setData] = useState([]);
+
 	useEffect(() => {
 		// API_ENDPOINT là bất kỳ đường dẫn API nào trả về dạng JSON
 		fetch("API_ENDPOINT")
@@ -414,5 +416,7 @@ hoặc có thể viết như sau:
 				console.log("End")
 			})
 	}, [])
+	
 	return <div>Demo</demo>
-}`
+}
+`
