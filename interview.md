@@ -391,7 +391,8 @@ hoặc có thể viết như sau:
 
 ### Câu 6. FetchAPI trong React?
 
-`
+
+```
 function App() {
 	const [data, setData] = useState([]);
 
@@ -419,4 +420,4 @@ function App() {
 	
 	return <div>Demo</demo>
 }
-`
+```
