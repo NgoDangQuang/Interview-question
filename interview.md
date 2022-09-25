@@ -360,7 +360,47 @@ hoặc có thể viết như sau:
 
 # D. React JS
 
-### Câu 1: Sự khác nhau giữa Functional Component (stateless) và Class Component (stateful) trong ReactJS?
+### Câu 1: SPA - MPA là gì? Sự khác nhau?
+
+- SPA: Single Page App
+    + Được cho là cách tiếp cận hiện đại hơn
+    + Không yêu cầu tải lại trang trong quá trình sử dụng
+    + Google, Facebook, Twitter
+
+- MPA: Multi Page App
+    + Là cách tiếp cận cổ điển hơn
+    + Tải lại trang trong quá trình sử dụng
+
+- Tốc độ:
+    + SPA nhanh hơn khi sử dụng, phần lớn tài nguyên được tải ngay lần đầu, trang chỉ tải thêm dữ liệu mới khi cần
+    + MPA chậm hơn khi sử dụng, luôn tải lại toàn bộ trang khi tải lại hoặc chuyển hướng.
+
+- Bóc tách:
+    + SPA có phần Front-end riêng biệt
+    + MPA Frontend và Backend phụ thuộc nhau nhiều hơn, được đặt trong cùng một dự án.
+
+- SEO:
+    + SPA không thân thiện với SEO như MPA
+    + SPA trải nghiệm tren thiết bị di động tốt hơn.
+
+- Quá trình phát triển:
+    + SPA dễ dàng tái sử dụng code (component)
+    + SPA bóc tách Frontend - Backend => chia team phát triển song song, phát triển thêm mobile app dễ dàng.
+
+- Phụ thuộc Javascript
+    + SPA phụ thuộc hoàn toàn vào javascript
+    + MPA có thể không cần Javascript
+
+- Chọn SPA hay MPA
+    + Không có gì là hoàn hảo trong mọi trường hợp. Nhưng hiện tại SPA vẫn đang là lựa chọn tốt hơn so với MPA
+
+
+### Câu 2: Tại sao phải sử dụng React - DOM
+
+- React DOM làm một thư viện, là cầu nối giữa REACT và DOM
+- Để ta có thể render React Element ra trình duyệt.
+
+### Câu 3: Sự khác nhau giữa Functional Component (stateless) và Class Component (stateful) trong ReactJS?
 
 - Functional component (stateless) là hàm không có local state và cũng không có lifecycle method , vì thế cũng không có componentDidMount.
 - Class component (stateful): là hàm có state, có lifecycle method
@@ -371,26 +411,181 @@ hoặc có thể viết như sau:
 ===> Chọn Functional component vì nó gọn hơn, dễ test hơn vì khi viết một hàm thì cái hàm nó sẽ dễ đọc hơn với input là props, output là render. Thay vì việc phải viết một cái class component có extend , có hàm render, rồi đủ thứ hàm khác nữa.
 
 
-### Câu 2. Trong component khi muốn lấy dữ liệu từ server để hiển thị ra thì cái hàm lấy dữ liệu ta sẽ viết trong function nào?
+### Câu 4. Trong component khi muốn lấy dữ liệu từ server để hiển thị ra thì cái hàm lấy dữ liệu ta sẽ viết trong function nào?
 
-- component didmount
-- component didmount đc gọi sau khi được render
+- ComponentDidMount
+- ComponentDidMount được gọi sau khi được render
 
-### Câu 3: React có gì hay mà người ta dùng nhiều vậy ?
+### Câu 5: React có gì hay mà người ta dùng nhiều vậy ?
 
 - React có tách thành các components nên cách viết code nó sẽ tiện hơn và tính tái sử dụng rất cao.
 
-### Câu 4. Sự khác nhau giữa Props và State?
+### Câu 6: Sự khác nhau giữa Props và State?
 
-- Props là viết tắt của Property là đối số của function và không thể thay đổi được giá trị của Props
+- Props là viết tắt của Property là đối số của component và không thể thay đổi được giá trị của Props
 - State là giá trị riêng của Component, và ta có thể thay đổi được giá trị của state, khi state thay đổi thì component sẽ được re-Render.
 
-### Câu 5. kể tên một số Hook trong ReactHook?
+
+## REACT HOOKS
+
+### Câu 7. kể tên một số Hook trong ReactHook?
 
 - useState, useEffect, useReducer, useMemo, useCallback, useRef, ...
 
-### Câu 6. FetchAPI trong React?
+### Câu 8: useState trong React Hooks?
 
+- useState dùng khi muốn dữ liệu thay đổi thì giao diện tự động cập nhật (Re-render theo dữ liệu)
+
+### Câu 9: Two-way binding?
+
+- Gõ bên ngoài thì bên trong thay đổi , bên trong thay đổi thì bên ngoài thay đổi.
+
+```
+vd: ô input ta gõ dữ liệu vào thì nó hiện lên
+
+const [name ,setName] = useState('')
+<input value={name} onChange={e=>setname(e.target.value)}/>
+
+```
+
+### Câu 10: Mounted & UnMounted ?
+
+- Mounted: là thời điểm đưa component vào sử dụng
+- UnMounted: là thời điểm lấy component ra không sử dụng nữa
+
+### Câu 11: useEffect trong React Hooks?
+
+- useEffect dùng khi ta muốn thực hiện các side effects (khi có 1 tác động xảy ra dẫn tới dữ liệu của chương trình bị thay đổi)
+- Luôn được gọi khi component mounted
+
+- Cách sử dụng useEffect():
+
+- useEffect(callback):
+    + Gọi callback mỗi khi re-render
+    + Gọi callback sau khi component thêm element vào Dom ( tức là return() được chạy xong thì chạy useEffect)
+- useEffect(callback,[]):
+    + Chỉ gọi callback một lần sau khi component được mounted
+- useEffect(callback, [deps]):
+    + Callback sẽ được gọi sau khi deps thay đổi
+
+- Áp dụng:
+    + update DOM
+    + Call API
+    + Listen DOM Event(scroll, resize)
+    + Cleanup (remove listener/ unsubscribe, clear timer)
+
+- Lưu ý: 
+    + Clean up function luôn được gọi trước khi callback được gọi (trừ lần mounted)
+    + Trước khi callback lần tiếp theo thì clean up sẽ dọn dẹp lần trước đó
+    + Từ lần callback thứ 2 thì clean up mới được chạy và chạy trước callback
+
+```
+vd:
+    useEffect(()=>{
+        code here...
+        return()=>{
+            dọn dẹp
+        }
+    }, [deps])
+```
+
+### Câu 12: useLayoutEffect trong React Hooks?
+
+- useEffect và useLayoutEffect rất giống nhau về mặt ý nghĩa, cú pháp. Nhưng khác nhau thứ tự thực hiện.
+- Cả 2 hooks này sinh ra để giúp chúng ta có chỗ để xử lý các side effect
+
+- useEffect
+    1. Cập nhật lại state
+    2. Cập nhật DOM (mutated)
+    3. Render lại UI
+    4. Gọi clean up nếu deps thay đổi
+    5. Gọi useEffect callback
+
+- useLayoutEffect
+    1. Cập nhật lại state
+    2. Cập nhật DOM
+    3. Gọi clean up nếu deps thay đổi
+    4. Gọi useLayoutEffect callback
+    5. Render lại UI
+
+### Câu 13: useRef trong react hooks?
+
+- Dùng để lưu các giá trị qua 1 tham chiếu bên ngoài function component (ref : reference (tham chiếu))
+- useRef sẽ luôn trả về một Object chó property là current
+
+
+### Câu 14: useCallback() trong React Hooks?
+
+- Giúp ta trả lại tham chiếu trước đó thay vì trả ra 1 hàm mới
+- Cú pháp giống useEffect --> useCallback(callback,[deps])
+- useCallback chỉ có tác dụng khi có memo mà thôi
+
+### Câu 15: `useMemo()` trong React Hooks?
+
+- Khác nhau giữa `useMemo()` và `memo()`
+    + `useMemo()`: Được viết trong phần thân của func component, chức năng tránh thực hiện lại một logic nào đó không cần thiết
+    + `memo()`: Ôm thằng React component chúc năng tránh component bị re-render trong những tình huống không cần thiết
+
+### Câu 16: useReducer() trong React Hooks?
+
+- `useReducer` cung cấp cho ta thêm 1 sự lựa chọn để sử dụng `state` cho function component
+- Trong bất cứ bài toán nào dùng `state` giải quyết được thì dùng `useReducer` cũng có thể giải quyết được
+
+- `useState`: dùng khi có các `state` đơn giản như số, chuỗi, boolean, array, object đơn giản
+- `useReducer` dùng khi có `state` phức tạp như array, object lồng nhau phức tạp. Các state liên kết với nhau, ảnh hưởng trực tiếp lên nhau thì ta nên dùng `useReducer`.
+
+- Cách triển khai
+    + useState()
+        1. Init State
+        2. Actions
+
+    + useReducer()
+        1. Init state
+        2. Actions
+        3. Reducer
+        4. Dispatch
+
+### Câu 17: `useContext()` trong React Hooks?
+
+- useContext() giúp đon giản hóa việc truyền dữ liệu từ các component cha sang các component con mà không phải sử dụng đến props
+- Cách dùng:
+    1. Create Context (tạo context)
+    2. Provider (cung cấp)
+    3. Consumer (nhận dữ liệu)
+
+### Câu 18: `useImperativeHandle()` trong React Hooks?
+
+- Giúp ta có thể tùy chỉnh được ref của func component
+
+### Câu 19: React Router V6?
+
+- React Router tạo ra cơ chế định tuyến nội bộ.
+
+
+
+## REACT HOC (Higher Order Component)
+
+### Câu 1. React.memo()?
+
+- Giúp chúng ta xử lí 1 component để tránh bị re-render trong những tình huống không cần thiết.
+vd: khi ta có 2 tham số và 1 tham số truyền xuống component con và 1 tham số khác được sử dụng ở component cha. Khi tham số ở component con thay đổi thì render lại, còn tham số chỉ được dùng ở component cha thì component con không cần render lại.
+
+
+
+
+
+
+# E. API
+
+### 1. Restful API là gì?
+
+- REST viết tắt của REpresentational State Transfer (chuyển trạng thái biểu diễn)
+- API [Application Programing Interface]: giao diện lập trình ứng dụng hay còn gọi là cổng giao tiếp giữa các phần mềm. 
+- Restful API (RestAPI): là một giao diện lập trình ứng dụng (API) mà tuân thủ các ràng buộc và quy ước kiến trúc REST được sử dụng trong việc giao tiếp giữa client và server
+
+- Backend -> API(URL) -> Fetch -> JSON/XML -> JSON.parse -> Javascript types -> Render ra gao diện
+
+### Câu 2. FetchAPI trong React?
 
 ```
 function App() {
@@ -421,3 +616,6 @@ function App() {
 	return <div>Demo</demo>
 }
 ```
+
+
+# F. REDUX - REDUX SAGA
