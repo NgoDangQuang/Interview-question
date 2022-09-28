@@ -41,7 +41,7 @@
 
 * Simple selector: id, class, name
 * Combinator selector: div > p {}, div p{}
-* Pseudo-class selector: a:link , a:hover, a:active
+* Pseudo-class selector: a:link , a:hover, a:active, a:first-child(), a:last-child()
 * Pseudo-element selecttor: p::first-letter, p::first-line, p:before , p::after
 * Atribute selector: a[target], a[target="_blank"] , [class^="top"]
 
@@ -89,7 +89,7 @@
 - Nói đơn giản, Hoisting chính là việc chúng ta có thể sử dụng biến rồi khai báo nó sau.
 
 * Giá trị của biến khi khai báo var là undefined
-* Giá trị let avf const vẫn được hoist nhưng nó không có giá trị nên sẽ báo lỗi Reference Error.
+* Giá trị let và const vẫn được hoist nhưng nó không có giá trị nên sẽ báo lỗi Reference Error.
 
 ### Câu 4: Trong JS so sánh == và === khác nhau như thế nào?
 
@@ -105,7 +105,7 @@
 - Filter(): Trả về tất cả các phần tử thỏa mãn điều kiện nào đó cho trước
 - Find(): Tìm phần tử trong mảng dựa vào dữ liệu cho trước( 1 phần tử đầu tiên )
 - ForEach(): gọi một hàm cho mỗi phần tử trong mảng
-- Includes(): Tìm kiếm một phần tử có tồm tại trong mảng hay không ( true/false )
+- Includes(): Tìm kiếm một phần tử có tồn tại trong mảng hay không ( true/false )
 - IndexOf(): trả về chỉ mục đầu tiên của một phần tử trong mảng nếu tìm thấy, nếu không có thì trả về -1
 - Join(): kết nối tất cả các phần tử trong một mảng thành một chuỗi và ngăn cách chúng bằng separator( mặc định là dấu phẩy)
 - Map(): tạo một mảng mới với các kết quả của việc gọi một hàm đã cho trên mỗi phần tử của mảng này
@@ -127,10 +127,21 @@
 * Arrow function: Là một kiểu cú pháp rút gọn cho khai báo hàm trong Javascript
 * Template string: Cúng giống như là string literals nhưng cho phép đính kèm biểu thức. Nó cũng cho phép khai báo chuỗi trên nhiều dòng. Cách dùng là sử dụng ký tự backtick ``(dấu huyền)
 * Object literals: Cũng là khai báo một object như thường lệ, nhưng cho phép khai báo tắt thuộc tính của object với biến cùng tên và khai báo phương thức cho object.
-* Destructuring: Giúp ta tách biến từ thuộc tính của đối tượng hay phần tử trong các đối tượng có thể duyệt với for như là mảng hoặc chuỗi.
+* Destructuring (phân rã): Giúp ta tách biến từ thuộc tính của đối tượng hay phần tử trong các đối tượng có thể duyệt với for như là mảng hoặc chuỗi.
+```
+vd: var array=['java', 'c', 'ruby']
+var [a, ,c]=array
+=> console.log(a, c)=> java, ruby
+```
 * Rest: (Phần còn lại) là phần bổ sung của phân rã biến mảng. Rest được dùng khi khai báo hàm có thể nhận nhiều tham số.
+```
+vd: var array=['java', 'C', 'ruby']
+var [a,...rest]=array
+=> console.log(a)=> java
+=> console.log(rest)=> C Ruby
+```
 * Spread: (Rải) là thao tác ngược lại với Rest, giúp ta kết hợp một mảng đã có sẵn thành một mảng mới. Spread rất hữu ích để thay thế các thao tác trên mảng như concat().
-* Default value: Cho phép mình thiết lập giá rị mặc định cho tham số khi nó không được truyền giá trị hoặc có giá trị undefined. Thường dùng trong khi truyền giá trị vào hàm.
+* Default value: Cho phép mình thiết lập giá trị mặc định cho tham số khi nó không được truyền giá trị hoặc có giá trị undefined. Thường dùng trong khi truyền giá trị vào hàm.
 * Class: với ES5 chúng ta sử dụng function để tạo lớp và thêm các phương thức vào lớp bằng cách mở rộng prototype. Thì với ES6 chúng ta có cú pháp mới giúp tạo lớp trực tiếp và dễ dàng hơn. Có thể kế thừa từ lớp khác bằng từ khóa extends.
 * Promises: Sinh ra để giúp chúng ta sử lý các tác vụ bất đồng bộ.
 
@@ -144,6 +155,28 @@
   - Resolve: được gọi khi thao tác logic thành công
   - Reject : được gọi khi thao tác thất bại
 
+```
+var promise = new Promise(
+    function(resolvem reject){
+        resolve([data]);
+        reject();
+    }
+)
+
+promise
+    .then(function(){
+        return data
+    })
+    .then(function(data){
+        console.log(data)
+    })
+    .catch(function(error){
+        console.log(error)
+    })
+    .finally(function(){
+        console.log("successfully!")
+    })
+```
 - Khi chúng ta sử dụng Promise, chúng ta sẽ sử dụng 2 phương thức đó là (.then) và (.catch). Cả 2 phương thức này đều nhận callback 
     + sẽ được thực thi vào thằng then khi promise được resolve 
     + sẽ thực thi vào catch khi promise bị reject
@@ -153,12 +186,6 @@
     + Fulfilled : thành công (resolve được gọi)
     + Reject    : thất bại ( reject được gọi)
 
-var promise = new Promise(
-    funtion(resolve, reject){
-        resolve(console.log('Successfully!'));
-        reject('Failuer!');
-    }
-)
 
 ### Câu 8: So sánh giữa var, let và const ?
 
@@ -175,7 +202,7 @@ var promise = new Promise(
 
 ### Câu 10: Khái niệm callback? Tại sao lại dùng callback ? Dùng trong những trường hợp nào khi code ?
 
-- Callback là một hàm được truyền vào hàm khác dưới dạng đôi số.
+- Callback là một hàm được truyền vào hàm khác dưới dạng đối số.
 - Dùng trong trường hợp một hành động bất đồng bộ, một hành động nó chưa hoàn thành xong ngay lúc nó chạy thì ta truyền callback vào để chạy ngay sau khi có kết quả
 - Dùng khi tạo một event hay gì đó thì ta đưa một callback function vào để khi người dùng bấm vào một cái nút hoặc hover chuột thì nó sẽ gọi cái hàm đó
 
@@ -356,6 +383,22 @@ hoặc có thể viết như sau:
         fn.call(thisArg,[arg1, arg2, ...])
 
 
+
+
+### Câu 25: IIFE - Immediately Invoked Function Expresstion ?
+
+- IIFE là biểu thức sẽ tạo ra 1 hàm và hàm đó sẽ được gọi ngay lập tức.
+
+```
+(function(message){
+    console.log(message)
+})("hello)
+```
+
+- Dùng đấu ; trước IIFE để tránh các lỗi gọi hàm của dòng code bên trên, để khẳng định rằng 2 dòng này là không liên quan đến nhau
+- IIFE là hàm `private` => chúng không thể gọi lại hàm này ở ngoài hàm, nhưng có thể gọi lại trong chính hàm của nó (đệ quy)
+- Dùng IIFE khi ta khống muốn chúng ảnh hưởng đến các biến global
+- Các giá trị trả về của IIFE nằm trong return nên các biến bí mật t ko đưa vào đó để tạo tính private cho chúng.
 
 
 # D. React JS
