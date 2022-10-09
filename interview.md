@@ -4,6 +4,8 @@
 
 - Tên tuổi: Ngô Đăng Quang - 22 Tuổi
 - Sinh viên Đại học khoa học Tự Nhiên, Khoa Công Nghệ Thông Tin
+- Tính cách hơi hướng nội, nhưng khi đã quen với môi trường sung quanh thì em sẽ trở nên khá là cởi mở.
+- Em là một người chịu khó tìm tòi, học hỏi những thứ mới, những thứ cần thiết trong công việc của mình.
 - Sở thích: Yêu thích các môn thể thao vận động mạnh như bóng chuyền, đá bóng và võ thuật. Ngoài ra em cũng yêu thích code web Frontend tại vì em có thể tạo ra những sản phẩm đẹp theo ý thích của bản thân.
 - Định hướng làm việc của em: Trong thời gian tới em sẽ làm thiên về Frontend Development, tương lai xa hơn em muốn trở thành một Fullstack Development
 
@@ -157,7 +159,7 @@ var [a,...rest]=array
 
 ```
 var promise = new Promise(
-    function(resolvem reject){
+    function(resolve, reject){
         resolve([data]);
         reject();
     }
@@ -276,7 +278,7 @@ promise
 ### Câu 21. Bind() method?
 
 - Phương thức bind() cho phép ràng buộc this cho một phương thức (function)
-- Bind() sẽ trả về một hàm mới, có thể nhận các đối số nư hàm ban đầu.
+- Bind() sẽ trả về một hàm mới, có thể nhận các đối số như hàm ban đầu.
 - Khi dùng phương thức Bind() thì tham số truyền vào () sẽ là đối tượng cho this, nó sẽ tạo ra một hàm mới và đối tượng là tham số này.
 - Có thể mượn hàm
 VD: const student = {name:'Quang', age:18}
@@ -298,7 +300,7 @@ const getTeacherName = teacher.getName.bind(teacher) ==> Dung 20
 - Call() là phương thức trong prototype của function constructor, phương thức này được dùng để gọi hàm và cũng có thể bind this cho hàm.
 - Bind() và Call() khác nhau
     + Bind() là chỉ bind()
-    + Còn Call() là bind()  xong rồi call() chạy hàm luôn.
+    + Còn Call() là bind() xong rồi call() chạy hàm luôn.
 - Call() có thể mượn hàm
 
 VD: const student = {name:'Quang', age:18}
@@ -347,12 +349,12 @@ let result = greet.apply(teacher,['Hi', 'Xin chao'])
 - Tính kế thừa giống call() chỉ khác 1 thứ
 
 VD  function Chicken(){
-        Animal.call(this, argument)
+        Animal.apply(this, argument)
         this.legs = legs
     }
 hoặc có thể viết như sau:
     function Chicken(name, weight, legs){
-        Animal.call(this, [name, weight])
+        Animal.apply(this, [name, weight])
         this.legs = legs
     }
 
